@@ -7,7 +7,7 @@
             <div class="card">
                 <div class="card-header">
                     Artículos
-                    <a href="{{ route('posts.index')}}" class="btn btn-sm btn-primary float-right">Crear</a>
+                    <a href="{{ route('posts.create')}}" class="btn btn-sm btn-primary float-end">Crear</a>
                 </div>
 
                 <div class="card-body">
@@ -16,6 +16,40 @@
                             {{ session('status') }}
                         </div>
                     @endif
+
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Titulo</th>
+                                <th colspan="2">&nbsp;</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach($posts as $post)
+                            <tr>
+                                <td>{{ $post->id }}</td>
+                                <td> {{ $post->title }}</td>
+                                <td>
+                                    <a href="{{ route('posts.edit', $post) }}" class="btn btn-primary btn-sm">
+                                         Editar
+                                    </a>
+                                    <form action="{{ route('posts.destroy', $post) }}" method="POST">
+                                        @csrf
+                                        @method('DELETE')
+                                        <input 
+                                        type="submit" 
+                                        value="Eliminar" 
+                                        class="btn btn-danger btn-sm"
+                                        onclick="return confirm('¿Desea eliminar...?')"
+                                        >
+                                    </form>
+                                </td>
+                                
+                            </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
                 'You are logged in!'
 
                 </div>
