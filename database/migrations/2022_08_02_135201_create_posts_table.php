@@ -22,7 +22,7 @@ return new class extends Migration
             $table->string('slug')->unique();
 
             $table->text('image')->nullable();
-
+            
             $table->text('body');
             $table->text('iframe')->nullable();
             

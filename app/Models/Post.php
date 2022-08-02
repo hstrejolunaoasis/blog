@@ -9,13 +9,14 @@ use Illuminate\Database\Eloquent\Model;
 class Post extends Model
 {
     use Sluggable;
+    use HasFactory;
 
     /**
      * Return the sluggable configuration array for this model.
      *
      * @return array
      */
-    public function sluggable()
+    public function sluggable(): array
     {
         return [
             'slug' => [
@@ -23,5 +24,11 @@ class Post extends Model
                 'onUpdate'=> true
             ]
         ];
+    }
+
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
     }
 }
